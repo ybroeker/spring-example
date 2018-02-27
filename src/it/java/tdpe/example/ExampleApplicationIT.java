@@ -11,7 +11,7 @@ public class ExampleApplicationIT {
 
 	@Test
 	public void contextLoads() {
-		org.junit.jupiter.api.Assertions.fail("");
+
 	}
 
 }

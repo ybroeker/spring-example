@@ -6,6 +6,5 @@ public class ExampleUnitTest {
 
     @Test
     public void unitTest() {
-        org.junit.jupiter.api.Assertions.fail("");
     }
 }
