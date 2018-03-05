@@ -7,14 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-// tag::class[]
-@Controller //<1>
+@Controller
 public class WelcomeController {
 
-    @Value("${application.message:Hello World}") //<3>
+    @Value("${application.message:Hello World}")
     private String message = "Hello World";
 
-    @RequestMapping("/") //<2>
+    @RequestMapping("/")
     public ModelAndView welcome() {
         final ModelAndView modelAndView = new ModelAndView("welcome");
         modelAndView.addObject("time", LocalDateTime.now());
@@ -24,4 +23,3 @@ public class WelcomeController {
     }
 
 }
-// end::class[]
