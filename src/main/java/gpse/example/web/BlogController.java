@@ -1,6 +1,7 @@
 package gpse.example.web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gpse.example.domain.Article;
 import gpse.example.domain.User;
@@ -14,11 +15,11 @@ public class BlogController {
 
     @RequestMapping("/")//<2>
     public ModelAndView showBlog() {
-        var modelAndView = new ModelAndView("blog");//<3>
+        ModelAndView modelAndView = new ModelAndView("blog");//<3>
 
         User user = new User("Uncle Bob", "Bob", "Martin");
 
-        var articles = new ArrayList<>();//<4>
+        List<Article> articles = new ArrayList<>();//<4>
         articles.add( new Article(user, "A magnificent Article", "Lorem ipsum dolor"));
         articles.add( new Article(user, "Another Article", "sit amet, consetetur sadipscing elitr"));
 
