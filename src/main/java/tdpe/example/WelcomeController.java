@@ -16,7 +16,7 @@ public class WelcomeController {
 
     @RequestMapping("/") //<2>
     public ModelAndView welcome() {
-        ModelAndView modelAndView = new ModelAndView("welcome");
+        final ModelAndView modelAndView = new ModelAndView("welcome");
         modelAndView.addObject("time", LocalDateTime.now());
         modelAndView.addObject("message", this.message);
 

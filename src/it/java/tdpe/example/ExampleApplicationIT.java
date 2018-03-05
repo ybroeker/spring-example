@@ -9,9 +9,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(classes = ExampleApplication.class)
 public class ExampleApplicationIT {
 
-	@Test
-	public void contextLoads() {
-
-	}
+    @Test
+    public void contextLoads() {
+        //Tests Application-Start.
+    }
 
 }
