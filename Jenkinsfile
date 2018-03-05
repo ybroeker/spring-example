@@ -23,21 +23,20 @@ pipeline {
                 sh 'mvn -B test'
             }
             post {
-                always {
-                    junit '**/*-reports/**/*.xml'
-                    jacoco classPattern: '**/target/**/classes', execPattern: '**/target/jacoco-aggregate.exec'
-                }
+                 always {
+                      stash name: "testresults", includes: "**/*-reports/**/*.xml,**/target/**/classes/**/*.class,**/target/**.exec"
+                 }
             }
+
         }
         stage('Integration-Test') {
             steps {
                 sh 'mvn -B verify'
             }
             post {
-                always {
-                    junit '**/*-reports/**/*.xml'
-                    jacoco classPattern: '**/target/**/classes', execPattern: '**/target/jacoco-aggregate.exec'
-                }
+                 always {
+                      stash name: "testresults", includes: "**/*-reports/**/*.xml,**/target/**/classes/**/*.class,**/target/**.exec"
+                 }
             }
         }
         stage('Deploy') {
@@ -50,6 +49,11 @@ pipeline {
         }
     }
     post {
+        always {
+            unstash 'testresults'
+            junit '**/*-reports/**/*.xml'
+            jacoco classPattern: '**/target/**/classes', execPattern: '**/target/jacoco-aggregate.exec'
+        }
         success {
             archive "target/*-exec.jar"
         }
