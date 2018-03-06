@@ -14,6 +14,8 @@ pipeline {
                 always {
                     checkstyle pattern: '**/checkstyle-result.xml'
                     pmd canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '', pattern: '**/target/pmd.xml', unHealthy: ''
+                    warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'Java Compiler (javac)']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
+
                     // cpd
                 }
             }

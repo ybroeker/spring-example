@@ -80,6 +80,7 @@
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
 
@@ -189,7 +190,7 @@
                     </outputFile>
                     <includeTestSourceDirectory>false</includeTestSourceDirectory>
                     <consoleOutput>true</consoleOutput>
-                    <violationSeverity>warning</violationSeverity>
+                    <violationSeverity>error</violationSeverity>
                     <failOnViolation>false</failOnViolation>
                 </configuration>
                 <executions>
