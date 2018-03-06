@@ -28,8 +28,10 @@ class BlogControllerIT {
         this.mvc.perform(get("/"))  //<5>
                 .andExpect(status().isOk())  //<6>
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) //<7>
-                .andExpect(content().string(containsString("A magnificent Article")))  //<8>
+                .andExpect(content().string(containsString("BlogPosts"))) //<8>
+                .andExpect(content().string(containsString("A magnificent Article")))  //<9>
                 .andExpect(content().string(containsString("Another Article")));
+
     }
 }
 // tag::test[]
