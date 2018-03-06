@@ -20,7 +20,7 @@ public class Article {
         this.title = title;
         this.text = text;
         this.author = author;
-        this.publishedAt = LocalDateTime.now();//<2>
+        this.publishedAt = LocalDateTime.now(); //<2>
     }
     // end::class[]
 
@@ -43,8 +43,9 @@ public class Article {
     public List<Comment> getComments() {
         return comments;
     }
-// tag::add-comment[]
-    public void addComment(String commentText) {
+
+    // tag::add-comment[]
+    public void addComment(final String commentText) {
         this.comments.add(new Comment(commentText));
     }
     // end::add-comment[]
