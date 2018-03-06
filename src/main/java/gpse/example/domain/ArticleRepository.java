@@ -1,4 +1,4 @@
-package tdpe.example.domain;
+package gpse.example.domain;
 
 // tag::class[]
 import org.springframework.data.repository.CrudRepository;

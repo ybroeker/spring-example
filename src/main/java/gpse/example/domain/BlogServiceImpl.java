@@ -3,19 +3,25 @@ package gpse.example.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // tag::class[]
-@Service //<1>
-class BlogServiceImpl implements BlogService {
+@Service
+public class BlogServiceImpl implements BlogService {
+
+    private ArticleRepository articleRepository;
+
+    @Autowired//<1>
+    public BlogServiceImpl(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
 
     @Override
     public List<Article> getArticles() {
-        final User user = new User("Uncle Bob", "Bob", "Martin");
+        List<Article> articles = new ArrayList<>();
 
-        final List<Article> articles = new ArrayList<>();
-        articles.add(new Article(user, "A magnificent Article", "Lorem ipsum dolor"));
-        articles.add(new Article(user, "Another Article", "sit amet, consetetur sadipscing elitr"));
+        articleRepository.findAll().forEach(articles::add); //<2>
 
         return articles;
     }
