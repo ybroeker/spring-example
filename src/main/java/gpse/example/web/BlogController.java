@@ -9,21 +9,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import tdpe.example.domain.Article;
+import gpse.example.domain.BlogService;
+
 // tag::class[]
-@Controller //<1>
+@Controller
 public class BlogController {
 
-    @RequestMapping("/") //<2>
+    private BlogService blogService;
+
+    @Autowired //<1>
+    public BlogController(BlogService blogService) {
+        this.blogService=blogService;
+    }
+
+    @RequestMapping("/")
     public ModelAndView showBlog() {
-        final ModelAndView modelAndView = new ModelAndView("blog"); //<3>
+        ModelAndView modelAndView = new ModelAndView("blog");
 
-        final User user = new User("Uncle Bob", "Bob", "Martin");
-
-        final List<Article> articles = new ArrayList<>(); //<4>
-        articles.add(new Article(user, "A magnificent Article", "Lorem ipsum dolor"));
-        articles.add(new Article(user, "Another Article", "sit amet, consetetur sadipscing elitr"));
-
-        modelAndView.addObject("articles", articles); //<5>
+        List<Article> articles = blogService.getArticles(); //<2>
+        modelAndView.addObject("articles", articles);
 
         return modelAndView;
     }
