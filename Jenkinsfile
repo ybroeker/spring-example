@@ -13,7 +13,7 @@ pipeline {
             post {
                 always {
                     checkstyle pattern: '**/checkstyle-result.xml'
-                    pmd canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '', pattern: 'pmd.xml', unHealthy: ''
+                    pmd canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '', pattern: '**/target/pmd.xml', unHealthy: ''
                     // cpd
                 }
             }
