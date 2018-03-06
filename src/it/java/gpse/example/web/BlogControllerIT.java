@@ -31,7 +31,6 @@ class BlogControllerIT {
                 .andExpect(content().string(containsString("BlogPosts"))) //<8>
                 .andExpect(content().string(containsString("A magnificent Article")))  //<9>
                 .andExpect(content().string(containsString("Another Article")));
-
     }
 }
 // tag::test[]
