@@ -11,9 +11,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Article> getArticles() {
-        User user = new User("Uncle Bob", "Bob", "Martin");
+        final User user = new User("Uncle Bob", "Bob", "Martin");
 
-        List<Article> articles = new ArrayList<>();
+        final List<Article> articles = new ArrayList<>();
         articles.add(new Article(user, "A magnificent Article", "Lorem ipsum dolor"));
         articles.add(new Article(user, "Another Article", "sit amet, consetetur sadipscing elitr"));
 
