@@ -1,4 +1,4 @@
-package tdpe.example.domain;
+package gpse.example.domain;
 
 import java.util.ArrayList;
 import java.util.List;
