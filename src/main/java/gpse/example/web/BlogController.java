@@ -15,18 +15,18 @@ import gpse.example.domain.BlogService;
 @Controller
 public class BlogController {
 
-    private BlogService blogService;
+    private final BlogService blogService;
 
     @Autowired //<1>
-    public BlogController(BlogService blogService) {
-        this.blogService=blogService;
+    public BlogController(final BlogService blogService) {
+        this.blogService = blogService;
     }
 
     @RequestMapping("/")
     public ModelAndView showBlog() {
-        ModelAndView modelAndView = new ModelAndView("blog");
+        final ModelAndView modelAndView = new ModelAndView("blog");
 
-        List<Article> articles = blogService.getArticles(); //<2>
+        final List<Article> articles = blogService.getArticles(); //<2>
         modelAndView.addObject("articles", articles);
 
         return modelAndView;

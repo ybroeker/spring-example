@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogServiceImpl implements BlogService {
 
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
 
-    @Autowired//<1>
-    public BlogServiceImpl(ArticleRepository articleRepository) {
+    @Autowired //<1>
+    public BlogServiceImpl(final ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
     @Override
     public List<Article> getArticles() {
-        List<Article> articles = new ArrayList<>();
+        final List<Article> articles = new ArrayList<>();
 
         articleRepository.findAll().forEach(articles::add); //<2>
 
