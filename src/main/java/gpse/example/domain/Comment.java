@@ -30,6 +30,9 @@ public class Comment {
         this.writtenAt = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public String getText() {
         return text;

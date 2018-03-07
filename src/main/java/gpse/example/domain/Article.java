@@ -43,6 +43,9 @@ public class Article {
         this.publishedAt = LocalDateTime.now();
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
