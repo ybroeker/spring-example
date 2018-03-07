@@ -51,6 +51,14 @@
         </properties>
     </rule>
 
+    <rule ref="category/java/codestyle.xml/ShortVariable">
+        <properties>
+            <property name="minimum">
+                <value>2</value>
+            </property>
+        </properties>
+    </rule>
+
     <!--Allow more static imports - especially for tests-->
     <rule ref="category/java/codestyle.xml/TooManyStaticImports">
         <properties>
