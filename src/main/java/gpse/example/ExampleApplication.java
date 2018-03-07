@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 // tag::class[]
 @SpringBootApplication
 @EnableJpaRepositories // <1>
-@EnableTransactionManagement// <2>
+@EnableTransactionManagement //<2>
 public class ExampleApplication {
 // end::class[]
 

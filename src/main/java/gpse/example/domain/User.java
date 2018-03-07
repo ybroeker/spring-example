@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @Column
-    private String username;//<2>
+    private String username; //<2>
 
     @Column
     private String firstname; //<3>

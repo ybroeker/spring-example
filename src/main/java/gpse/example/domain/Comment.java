@@ -11,13 +11,13 @@ public class Comment {
     @Id
     @GeneratedValue
     @Column
-    Long id; //<2>
+    private Long id; //<2>
 
     @Lob
-    @Column//<3>
+    @Column //<3>
     private String text;
 
-    @Column//<4>
+    @Column //<4>
     private LocalDateTime writtenAt;
 
     protected Comment() { //<5>
@@ -29,7 +29,6 @@ public class Comment {
         this.text = text;
         this.writtenAt = LocalDateTime.now();
     }
-
 
 
     public String getText() {
