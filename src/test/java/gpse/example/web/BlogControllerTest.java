@@ -1,12 +1,12 @@
 package gpse.example.web;
 // tag::test[]
 
+import gpse.example.domain.BlogService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.servlet.ModelAndView;
-import tdpe.example.domain.BlogService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 // tag::class[]
 @Service //<1>
-public class BlogServiceImpl implements BlogService {
+class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Article> getArticles() {
