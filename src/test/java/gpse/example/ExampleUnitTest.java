@@ -1,4 +1,4 @@
-package tdpe.example;
+package gpse.example;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
