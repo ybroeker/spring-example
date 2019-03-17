@@ -1,8 +1,10 @@
-package tdpe.example.domain;
+package gpse.example.domain;
 // tag::test[]
 
 import java.time.LocalDateTime;
 
+import gpse.example.domain.Article;
+import gpse.example.domain.User;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

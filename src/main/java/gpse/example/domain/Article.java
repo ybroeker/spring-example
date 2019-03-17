@@ -1,4 +1,4 @@
-package tdpe.example.domain;
+package gpse.example.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
