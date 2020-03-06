@@ -25,12 +25,20 @@ class BlogServiceImpl implements BlogService {
         return articles;
     }
 
-    // tag::class[]
     @Override
     public Article addArticle(final User user, final String title, final String text) {
-        final Article article = new Article(user, title, text); //<1>
+        final Article article = new Article(user, title, text);
 
-        return articleRepository.save(article); //<2>
+        return articleRepository.save(article);
+    }
+
+    // tag::class[]
+    @Override
+    public Article getArticle(final String id) {
+        final Long articleId = Long.valueOf(id);//<1>
+
+        return articleRepository.findById(articleId)//<2>
+            .orElseThrow(() -> new IllegalArgumentException("No Article with id " + articleId + " found!"));//<3>
     }
     // end::class[]
 

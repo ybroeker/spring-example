@@ -6,6 +6,8 @@ import java.util.List;
 public interface BlogService {
     List<Article> getArticles();
 
-    Article addArticle(User user, String title, String text); //<1>
+    Article addArticle(User user, String title, String text);
+
+    Article getArticle(String id);
 }
 // end::class[]

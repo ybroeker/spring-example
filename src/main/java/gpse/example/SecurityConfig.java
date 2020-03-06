@@ -17,12 +17,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity //<1>
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+    // tag::configure[]
+
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         //@formatter:off
         http
             .authorizeRequests()
-                .antMatchers("/").permitAll() //<2>
+                .antMatchers("/", "/articles/{id:\\d+}/**")//<1>
+                    .permitAll() //<2>
                 .anyRequest().authenticated()
                 .and()
             .formLogin()  //<3>
@@ -32,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         //@formatter:on
     }
+    // end::configure[]
+
 
     @Autowired
     public void configureGlobal(final UserDetailsService userDetailsService,  //<5>

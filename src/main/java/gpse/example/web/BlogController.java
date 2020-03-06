@@ -32,6 +32,18 @@ public class BlogController {
         return modelAndView;
     }
 
+    // tag::single_article[]
+    @RequestMapping("/articles/{id:\\d+}")// <1>
+    public ModelAndView showArticle(@PathVariable("id") final String id) {// <2>
+        final ModelAndView modelAndView = new ModelAndView("article/article");//<3>
+
+        final Article article = blogService.getArticle(id);// <4>
+        modelAndView.addObject("article", article);
+
+        return modelAndView;
+    }
+    // end::single_article[]
+
     @GetMapping("/articles/add")
     public ModelAndView addArticle() {
         final ModelAndView modelAndView = new ModelAndView("article/add");
@@ -41,8 +53,7 @@ public class BlogController {
         return modelAndView;
     }
 
-    // tag::validation[]
-    @PostMapping("/articles/add")
+    @PostMapping("/articles/add")//<1>
     public ModelAndView addArticle(@AuthenticationPrincipal final User user,
                                    @Valid final CreateArticleCmd createArticleCmd,//<1>
                                    BindingResult bindingResult) {// <2>
@@ -57,6 +68,5 @@ public class BlogController {
 
         return new ModelAndView("redirect:/");
     }
-    // end::validation[]
 
 }
