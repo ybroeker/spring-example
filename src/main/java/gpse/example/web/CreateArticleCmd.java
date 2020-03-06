@@ -1,11 +1,15 @@
 package gpse.example.web;
 
-// tag::class[]
+import javax.validation.constraints.NotBlank;
+
 public class CreateArticleCmd {
+// tag::validation[]
 
-    private String title;
-
-    private String text;
+    @NotBlank// <1>
+            String title;
+    @NotBlank
+    String text;
+// end::validation[]
 
     public String getTitle() {
         return title;
@@ -23,4 +27,3 @@ public class CreateArticleCmd {
         this.text = text;
     }
 }
-// end::class[]

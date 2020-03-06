@@ -5,11 +5,21 @@
 <body>
 <form th:action="@{/articles/add}"
       th:object="${createArticleCmd}"
-      method="post"> <!--1-->
+      method="post">
     <label for="title">Titel:</label>
-    <input type="text" id="title" th:field="*{title}"/> <!--2-->
+    <input type="text" id="title" th:field="*{title}"/>
+
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"><!--1-->
+        Darf nicht leer sein!<!--2-->
+    </span>
+
+    <br/>
+
     <label for="text">Text:</label>
     <textarea id="text" th:field="*{text}"></textarea>
+    <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Darf nicht leer sein!</span>
+
+
     <input type="submit" value="Speichern"/>
 </form>
 

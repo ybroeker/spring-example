@@ -2,10 +2,13 @@ package gpse.example.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import gpse.example.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,31 +26,37 @@ public class BlogController {
     public ModelAndView showBlog() {
         final ModelAndView modelAndView = new ModelAndView("blog");
 
-        final List<Article> articles = blogService.getArticles(); //<2>
+        final List<Article> articles = blogService.getArticles();
         modelAndView.addObject("articles", articles);
 
         return modelAndView;
     }
 
-    // tag::show_form[]
-    @GetMapping("/articles/add")//<1>
+    @GetMapping("/articles/add")
     public ModelAndView addArticle() {
-        final ModelAndView modelAndView = new ModelAndView("article/add"); //<2>
+        final ModelAndView modelAndView = new ModelAndView("article/add");
 
-        modelAndView.addObject("createArticleCmd", new CreateArticleCmd()); //<3>
+        modelAndView.addObject("createArticleCmd", new CreateArticleCmd());
 
         return modelAndView;
     }
-    // end::show_form[]
 
-    // tag::post_form[]
-    @PostMapping("/articles/add")//<1>
-    public ModelAndView addArticle(@AuthenticationPrincipal final User user, //<2>
-                                   final CreateArticleCmd createArticleCmd) { //<3>
-        blogService.addArticle(user, createArticleCmd.getTitle(), createArticleCmd.getText()); //<4>
+    // tag::validation[]
+    @PostMapping("/articles/add")
+    public ModelAndView addArticle(@AuthenticationPrincipal final User user,
+                                   @Valid final CreateArticleCmd createArticleCmd,//<1>
+                                   BindingResult bindingResult) {// <2>
 
-        return new ModelAndView("redirect:/"); //<5>
+        if (bindingResult.hasErrors()) {// <3>
+            final ModelAndView modelAndView = new ModelAndView("article/add");// <4>
+            modelAndView.addObject("createArticleCmd", createArticleCmd);// <5>
+            return modelAndView;
+        }
+
+        blogService.addArticle(user, createArticleCmd.getTitle(), createArticleCmd.getText());
+
+        return new ModelAndView("redirect:/");
     }
-    // end::post_form[]
+    // end::validation[]
 
 }
