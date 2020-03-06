@@ -1,4 +1,4 @@
 /**
- * Package, welches Controller udn Command-Objekte enthält.
+ * Package, welches Controller und Command-Objekte enthält.
  */
 package gpse.example.web;
