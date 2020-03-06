@@ -6,13 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-// tag::class[]
 @Service
-public class BlogServiceImpl implements BlogService {
+class BlogServiceImpl implements BlogService {
 
     private final ArticleRepository articleRepository;
 
-    @Autowired //<1>
+    @Autowired
     public BlogServiceImpl(final ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
@@ -21,9 +20,19 @@ public class BlogServiceImpl implements BlogService {
     public List<Article> getArticles() {
         final List<Article> articles = new ArrayList<>();
 
-        articleRepository.findAll().forEach(articles::add); //<2>
+        articleRepository.findAll().forEach(articles::add);
 
         return articles;
     }
+
+    // tag::class[]
+    @Override
+    public Article addArticle(final User user, final String title, final String text) {
+        final Article article = new Article(user, title, text); //<1>
+
+        return articleRepository.save(article); //<2>
+    }
+    // end::class[]
+
+
 }
-// end::class[]
