@@ -15,7 +15,7 @@ class ArticleTest {
     void getTitle() {
         LocalDateTime testStarted = LocalDateTime.now();
 
-        User user = new User("testuser", "Test", "User");
+        User user = new User("testuser", "Test", "User", "$2a$10$WoG5Z4YN9Z37EWyNCkltyeFr6PtrSXSLMeFWOeDUwcanht5CIJgPa");
         Article article = new Article(user, "A short title", "Some text...");
 
 
@@ -31,7 +31,7 @@ class ArticleTest {
     void addComment() {
         LocalDateTime testStarted = LocalDateTime.now();
 
-        User user = new User("testuser", "Test", "User");
+        User user = new User("testuser", "Test", "User", "$2a$10$WoG5Z4YN9Z37EWyNCkltyeFr6PtrSXSLMeFWOeDUwcanht5CIJgPa");
         Article article = new Article(user, "A short title", "Some text...");
 
         assertThat(article.getComments()).isEmpty();
