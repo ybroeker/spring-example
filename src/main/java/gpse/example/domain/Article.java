@@ -6,35 +6,35 @@ import java.util.List;
 
 import javax.persistence.*;
 
-// tag::jpa[]
-@Entity //<1>
+@Entity
 public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id; //<2>
+    private Long id;
 
-    @ManyToOne //<3>
+    @ManyToOne
     private User author;
 
-    @Column //<4>
+    @Column
     private String title;
 
     @Lob
-    @Column //<5>
+    @Column
     private String text;
 
-    @Column //<6>
+    @Column
     private LocalDateTime publishedAt;
 
-    @OneToMany //<7>
+    // tag::comments[]
+    @OneToMany(cascade = CascadeType.ALL) //<1>
     private List<Comment> comments = new ArrayList<>();
+    // end::comments[]
 
-    protected Article() { //<8>
+    protected Article() {
 
     }
-    // end::jpa[]
 
     public Article(final User author, final String title, final String text) {
         this.title = title;

@@ -4,10 +4,25 @@
 
 <body>
 
-<h2 th:text="${article.title}"></h2> <!--1-->
+<h2 th:text="${article.title}"></h2>
 <p th:text="${article.text}"></p>
 
-<span th:text="${#temporals.format(article.getPublishedAt())}"></span> <!--2-->
+<span th:text="${#temporals.format(article.getPublishedAt())}"></span>
+
+
+<ul>
+    <li th:each="comment:${article.comments}" th:text="${comment.getText()}"></li><!--1-->
+</ul>
+
+<form th:method="POST"
+      th:action="@{/articles/{article_id}/comments(article_id=${article.id})}"
+      th:object="${addCommentCmd}"><!--2-->
+
+    <label for="text">Kommentar-Text:</label><!--3-->
+    <textarea id="text" th:field="*{text}"></textarea>
+
+    <input type="submit" value="Speichern"/>
+</form>
 
 </body>
 
