@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-// tag::class[]
 @Service
 class UserServiceImpl implements UserService {
 
@@ -18,8 +17,21 @@ class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return userRepository.findById(username) //<1>
-        .orElseThrow(() -> new UsernameNotFoundException("User name " + username + " not found.")); //<2>
+        return userRepository.findById(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User name " + username + " not found.")); //<2>
     }
+
+    // tag::createUser[]
+    @Override
+    public User createUser(final String username, final String password, final String firstname, final String lastname, final String... roles) {
+        final User user = new User(username, firstname, lastname, password);// <1>
+        for (final String role : roles) {
+            user.addRole(role);// <2>
+        }
+
+        final User saved = userRepository.save(user); // <3>
+        return saved;
+    }
+    // end::createUser[]
+
 }
-// end::class[]

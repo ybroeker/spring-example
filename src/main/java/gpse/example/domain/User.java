@@ -1,7 +1,6 @@
 package gpse.example.domain;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
@@ -9,9 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-// tag::class[]
 @Entity
-public class User implements UserDetails { //<1>
+public class User implements UserDetails {
 
     private static final long serialVersionUID = 0L;
 
@@ -26,25 +24,36 @@ public class User implements UserDetails { //<1>
     private String lastname;
 
     @Column
-    private String password; //<2>
+    private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles; //<3>
+    private List<String> roles;
 
     protected User() {
 
     }
 
-    public User(final String username, final String firstname, final String lastname, final String password) { // <4>
+
+    public User(final String username, final String firstname, final String lastname, final String password) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
     }
 
+// tag::addRole[]
+    public void addRole(String role) {
+        if (roles == null) {
+            this.roles = new ArrayList<>();//<1>
+        }
+
+        this.roles.add(role);//<2>
+    }
+// end::addRole[]
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList(roles.toArray(new String[0])); // <5>
+        return AuthorityUtils.createAuthorityList(roles.toArray(new String[0]));
     }
 
     @Override
@@ -58,7 +67,7 @@ public class User implements UserDetails { //<1>
     }
 
     @Override
-    public boolean isAccountNonExpired() { // <6>
+    public boolean isAccountNonExpired() {
         return true;
     }
 
@@ -87,4 +96,3 @@ public class User implements UserDetails { //<1>
 
 
 }
-// end::class[]
