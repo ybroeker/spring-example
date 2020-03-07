@@ -12,52 +12,25 @@ pipeline {
             }
             post {
                 always {
-                    checkstyle pattern: '**/checkstyle-result.xml'
-                    pmd canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '', pattern: '**/target/pmd.xml', unHealthy: ''
-                    warnings canComputeNew: false, canResolveRelativePaths: false, categoriesPattern: '', consoleParsers: [[parserName: 'Java Compiler (javac)']], defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', messagesPattern: '', unHealthy: ''
-
-                    // cpd
+                    recordIssues enabledForFailure: true, tools: [java(), checkStyle(), pmdParser(), javaDoc(), mavenConsole(), cpd(), taskScanner(highTags: 'FIXME', ignoreCase: true, includePattern: '**/*.java, **/*.xml', normalTags: 'TODO,HACK')]
                 }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn -B test'
-            }
-            post {
-                 always {
-                      stash name: "testresults", includes: "**/*-reports/**/*.xml,**/target/**/classes/**/*.class,**/target/**.exec"
-                 }
-            }
-
-        }
-        stage('Integration-Test') {
-            steps {
                 sh 'mvn -B verify'
             }
             post {
                  always {
-                      stash name: "testresults", includes: "**/*-reports/**/*.xml,**/target/**/classes/**/*.class,**/target/**.exec"
+                     junit '**/*-reports/**/*.xml'
+                     jacoco classPattern: '**/target/**/classes', execPattern: '**/target/jacoco-aggregate.exec'
                  }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                //timeout(time: 5, unit: 'DAYS') {
-                //    input message: 'Approve deployment?'
-                //}
-                echo 'Deploy'
             }
         }
     }
     post {
-        always {
-            unstash 'testresults'
-            junit '**/*-reports/**/*.xml'
-            jacoco classPattern: '**/target/**/classes', execPattern: '**/target/jacoco-aggregate.exec'
-        }
         success {
-            archive "target/*-exec.jar"
+            archive "target/*.jar"
         }
     }
 }
