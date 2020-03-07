@@ -12,35 +12,32 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SuppressWarnings("PMD.SignatureDeclareThrowsException")
-// tag::class[]
 @Configuration
-@EnableWebSecurity //<1>
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    // tag::configure[]
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         //@formatter:off
         http
             .authorizeRequests()
-                .antMatchers("/", "/articles/{id:\\d+}/**")//<1>
-                    .permitAll() //<2>
-                .anyRequest().authenticated()
+                .antMatchers("/")
+                    .permitAll()
+                .anyRequest()
+                    .authenticated()
                 .and()
-            .formLogin()  //<3>
+            .formLogin()
                 .permitAll()
                 .and()
-            .logout()  //<4>
+            .logout()
                 .permitAll();
         //@formatter:on
     }
-    // end::configure[]
 
 
     @Autowired
-    public void configureGlobal(final UserDetailsService userDetailsService,  //<5>
+    public void configureGlobal(final UserDetailsService userDetailsService,
                                 final PasswordEncoder passwordEncoder,
                                 final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
@@ -48,9 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {  //<6>
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 }
-// tag::class[]
