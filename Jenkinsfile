@@ -22,7 +22,7 @@ pipeline {
             }
             post {
                  always {
-                     junit '**/*-reports/**/*.xml'
+                     recordIssues enabledForFailure: true, tools: [junit()]
                      jacoco classPattern: '**/target/**/classes', execPattern: '**/target/jacoco-aggregate.exec'
                  }
             }
